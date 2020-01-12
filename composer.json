@@ -1,0 +1,41 @@
+{
+    "name": "sbine/simple-tenancy",
+    "description": "Simple Laravel multi-tenancy in the same database",
+    "keywords": ["multi", "tenancy", "laravel", "simple"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sara Bine",
+            "email": "sara@sarabine.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "laravel/framework": "^6.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sbine\\Tenancy\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sbine\\Tenancy\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sbine\\Tenancy\\TenancyProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
