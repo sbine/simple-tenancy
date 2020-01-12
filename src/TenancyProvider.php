@@ -2,10 +2,11 @@
 
 namespace Sbine\Tenancy;
 
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
-class TenancyProvider extends ServiceProvider
+class TenancyProvider extends ServiceProvider implements DeferrableProvider
 {
     protected $defer = true;
 
