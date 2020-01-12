@@ -8,8 +8,6 @@ use Illuminate\Support\ServiceProvider;
 
 class TenancyProvider extends ServiceProvider implements DeferrableProvider
 {
-    protected $defer = true;
-
     /**
      * Bootstrap any application services.
      *
