@@ -31,7 +31,7 @@ class Tenant
      */
     public function column(): string
     {
-        return 'user_' . $this->user()->getKeyName();
+        return 'user_' . (optional($this->user())->getKeyName() ?? 'id');
     }
 
     /**
@@ -39,7 +39,7 @@ class Tenant
      */
     public function id()
     {
-        return $this->user()->getKey();
+        return optional($this->user())->getKey();
     }
 
     protected function user(): ?Model
