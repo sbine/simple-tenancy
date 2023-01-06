@@ -1,6 +1,6 @@
 # Simple Laravel Multi-Tenancy
 
-![Build status](https://img.shields.io/github/workflow/status/sbine/simple-tenancy/Run%20tests)
+![Build status](https://img.shields.io/github/actions/workflow/status/sbine/simple-tenancy/tests.yml?branch=main)
 
 Simple Tenancy adds automatic multi-tenant support to Eloquent models stored in a shared database.
 
