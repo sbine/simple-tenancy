@@ -3,6 +3,7 @@
 namespace Sbine\Tenancy\Tests;
 
 use Illuminate\Database\Eloquent\Builder;
+use PHPUnit\Framework\Attributes\Test;
 use Sbine\Tenancy\SuperAdmin;
 use Sbine\Tenancy\TenancyScope;
 use Sbine\Tenancy\Tenant;
@@ -12,7 +13,7 @@ use Sbine\Tenancy\Tests\TestCase;
 
 class TenancyScopeTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_applies_a_where_condition_to_the_builder()
     {
         $this->app->singleton(Tenant::class, function () {
@@ -28,7 +29,7 @@ class TenancyScopeTest extends TestCase
         $this->assertEquals($where['value'], 50);
     }
 
-    /** @test */
+    #[Test]
     public function it_doesnt_apply_a_where_condition_when_tenant_can_override()
     {
         $this->app->singleton(Tenant::class, SuperAdmin::class);

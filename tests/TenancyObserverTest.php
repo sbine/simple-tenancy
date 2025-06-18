@@ -2,6 +2,7 @@
 
 namespace Sbine\Tenancy\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sbine\Tenancy\SuperAdmin;
 use Sbine\Tenancy\Tenant;
 use Sbine\Tenancy\Tests\Stubs\Model;
@@ -10,7 +11,7 @@ use Sbine\Tenancy\Tests\TestCase;
 
 class TenancyObserverTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_sets_model_tenant_on_save()
     {
         $this->app->singleton(Tenant::class, function () {
@@ -27,7 +28,7 @@ class TenancyObserverTest extends TestCase
         $this->assertEquals(101, $model->user_id);
     }
 
-    /** @test */
+    #[Test]
     public function it_doesnt_set_model_tenant_when_tenant_can_override()
     {
         $this->app->singleton(Tenant::class, SuperAdmin::class);

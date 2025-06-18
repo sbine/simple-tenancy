@@ -2,13 +2,14 @@
 
 namespace Sbine\Tenancy\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sbine\Tenancy\Tenant;
 use Sbine\Tenancy\Tests\Stubs\User;
 use Sbine\Tenancy\Tests\TestCase;
 
 class TenantTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_returns_the_tenant_id()
     {
         $user = new User(['id' => 31]);
@@ -16,7 +17,7 @@ class TenantTest extends TestCase
         $this->assertEquals(31, (new Tenant($user))->id());
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_user_id_as_the_default_column()
     {
         $user = new User;
@@ -24,7 +25,7 @@ class TenantTest extends TestCase
         $this->assertEquals('user_id', (new Tenant($user))->column());
     }
 
-    /** @test */
+    #[Test]
     public function it_appends_the_custom_primary_key_if_one_is_set()
     {
         $user = new User;
@@ -33,7 +34,7 @@ class TenantTest extends TestCase
         $this->assertEquals('user_hashid', (new Tenant($user))->column());
     }
 
-    /** @test */
+    #[Test]
     public function it_doesnt_allow_override_by_default()
     {
         $tenant = new Tenant(new User);
@@ -41,7 +42,7 @@ class TenantTest extends TestCase
         $this->assertFalse($tenant->canOverride());
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_the_results_of_the_override_check_if_provided()
     {
         $tenant = new Tenant(new User, function () {

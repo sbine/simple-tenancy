@@ -4,6 +4,7 @@ namespace Sbine\Tenancy\Tests;
 
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use PHPUnit\Framework\Attributes\Test;
 use Sbine\Tenancy\Tenant;
 use Sbine\Tenancy\Tests\TestCase;
 
@@ -12,7 +13,7 @@ use Sbine\Tenancy\Tests\TestCase;
  */
 class TenancyProviderTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_only_allows_overriding_while_no_one_is_authenticated()
     {
         $this->assertTrue(resolve(Tenant::class)->canOverride());
@@ -24,7 +25,7 @@ class TenancyProviderTest extends TestCase
         $this->assertTrue(resolve(Tenant::class)->canOverride());
     }
 
-    /** @test */
+    #[Test]
     public function it_sets_tenant_to_the_authenticated_user()
     {
         $user = new User;
