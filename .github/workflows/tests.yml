@@ -14,22 +14,22 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        php: [8.3, 8.2]
-        laravel: [11.*, 10.*, 9.*]
+        php: [8.5, 8.4, 8.3]
+        laravel: [13.*, 12.*, 11.*]
         dependency-version: [prefer-lowest, prefer-stable]
         include:
+          - laravel: 13.*
+            testbench: 11.*
+          - laravel: 12.*
+            testbench: 10.*
           - laravel: 11.*
             testbench: 9.*
-          - laravel: 10.*
-            testbench: 8.*
-          - laravel: 9.*
-            testbench: 7.*
 
     name: PHP${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
