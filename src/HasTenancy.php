@@ -10,6 +10,8 @@ trait HasTenancy
     public static function bootHasTenancy()
     {
         static::addGlobalScope(new TenancyScope);
-        static::observe(new TenancyObserver);
+        static::whenBooted(function () {
+            static::observe(new TenancyObserver);
+        });
     }
 }
