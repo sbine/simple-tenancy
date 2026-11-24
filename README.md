@@ -39,7 +39,7 @@ class MyTenant extends \Sbine\Tenancy\Tenant
     /**
      * Retrieve the column identifying each model's tenant.
      */
-    public function column()
+    public function column(): string
     {
         return 'tenant_hashid';
     }
@@ -49,7 +49,7 @@ class MyTenant extends \Sbine\Tenancy\Tenant
      */
     public function id()
     {
-        return $this->user->hashid;
+        return $this->user()->hashid;
     }
 }
 ```
@@ -64,7 +64,7 @@ For example, to prevent all querying and saving of tenant models when no one is 
     // In AppServiceProvider.php
     public function register()
     {
-        $this->app->singleton(\Sbine\Tenancy\Tenant::class, function () {
+        $this->app->bind(\Sbine\Tenancy\Tenant::class, function () {
             // Throw an AuthenticationException if auth check fails
             return new \Sbine\Tenancy\Tenant(Auth::authenticate());
         });
@@ -76,7 +76,7 @@ To allow overriding tenancy checks based on a policy or method, pass a callback 
     // In AppServiceProvider.php
     public function register()
     {
-        $this->app->singleton(\Sbine\Tenancy\Tenant::class, function () {
+        $this->app->bind(\Sbine\Tenancy\Tenant::class, function () {
             return new \Sbine\Tenancy\Tenant(Auth::user(), function ($user) {
                 return $user->can('admin');
             });
@@ -89,7 +89,7 @@ For complete control over tenant behavior, you can bind your own Tenant implemen
     // In AppServiceProvider.php
     public function register()
     {
-        $this->app->singleton(\Sbine\Tenancy\Tenant::class, function () {
+        $this->app->bind(\Sbine\Tenancy\Tenant::class, function () {
             return new MyTenant;
         });
     }
@@ -98,5 +98,5 @@ For complete control over tenant behavior, you can bind your own Tenant implemen
 ## Disabling tenancy
 For convenience, a SuperAdmin class is provided which you can bind at any time to disable tenant checks:
 ```php
-    $this->app->singleton(\Sbine\Tenancy\Tenant::class, \Sbine\Tenancy\SuperAdmin::class);
+    $this->app->bind(\Sbine\Tenancy\Tenant::class, \Sbine\Tenancy\SuperAdmin::class);
 ```

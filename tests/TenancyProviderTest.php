@@ -35,4 +35,26 @@ class TenancyProviderTest extends TestCase
 
         $this->assertEquals(10, resolve(Tenant::class)->id());
     }
+
+    #[Test]
+    public function it_uses_the_user_who_is_logged_in_at_query_time()
+    {
+        $user = new User;
+        $user->id = 10;
+        Auth::login($user);
+
+        $this->assertEquals(10, resolve(Tenant::class)->id());
+    }
+
+    #[Test]
+    public function it_keeps_a_binding_made_by_the_app()
+    {
+        $this->app->bind(Tenant::class, function () {
+            return new Tenant(new \Sbine\Tenancy\Tests\Stubs\User(['id' => 7]));
+        });
+
+        (new \Sbine\Tenancy\TenancyProvider($this->app))->register();
+
+        $this->assertEquals(7, resolve(Tenant::class)->id());
+    }
 }

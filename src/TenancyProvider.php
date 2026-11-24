@@ -9,22 +9,13 @@ use Illuminate\Support\ServiceProvider;
 class TenancyProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-    }
-
-    /**
      * Register any application services.
      *
      * @return void
      */
     public function register()
     {
-        $this->app->singleton(Tenant::class, function () {
+        $this->app->bindIf(Tenant::class, function () {
             return new Tenant(Auth::user(), function () {
                 return ! Auth::check();
             });

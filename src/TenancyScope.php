@@ -20,7 +20,7 @@ class TenancyScope implements Scope
         $tenant = resolve(Tenant::class);
 
         if (! $tenant->canOverride()) {
-            $builder->where($model->getTable() . '.' . $tenant->column(), '=', $tenant->id());
+            $builder->where($model->qualifyColumn($tenant->column()), '=', $tenant->id());
         }
     }
 }
